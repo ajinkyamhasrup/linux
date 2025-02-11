@@ -1,12 +1,18 @@
 #!/bin/bash
 
-if  [ $# -ne 2 ]; then
-	echo "Usage: $0 <student_name> <city>"
-	exit 1
+# Prompt the user for input if parameters are not provided
+if [ -z "$1" ]; then
+    read -p "Enter Student Name: " STUDENT_NAME
+else
+    STUDENT_NAME=$1
 fi
 
-STUDENT_NAME=$1
-CITY=$2
+if [ -z "$2" ]; then
+    read -p "Enter City: " CITY
+else
+    CITY=$2
+fi
 
+# Display the input values
 echo "Student Name: $STUDENT_NAME"
-echo "CITY: $CITY"
+echo "City: $CITY"

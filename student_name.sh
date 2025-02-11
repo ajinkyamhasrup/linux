@@ -1,18 +1,15 @@
-pipeline {
-    agent any
-    parameters {
-        string(name: 'STUDENT_NAME', defaultValue: 'Alice', description: 'Enter Student Name')
-        string(name: 'CITY', defaultValue: 'New York', description: 'Enter City')
-    }
-    stages {
-        stage('Run Shell Script with Parameters') {
-            steps {
-                sh """
-                    #!/bin/bash
-                    echo "Student Name: ${STUDENT_NAME}"
-                    echo "City: ${CITY}"
-                """
-            }
-        }
-    }
-}
+#!/bin/bash
+
+# Check if two arguments are provided
+if [ $# -ne 2 ]; then
+    echo "Usage: $0 <student_name> <city>"
+    exit 1
+fi
+
+# Assign parameters to variables
+STUDENT_NAME=$1
+CITY=$2
+
+# Display the output
+echo "Student Name: $STUDENT_NAME"
+echo "City: $CITY"

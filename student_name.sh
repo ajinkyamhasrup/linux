@@ -1,14 +1,18 @@
-#!/bin/bash
-if [ -z "$1" ]; then
-    read -p "Enter Student Name: " STUDENT_NAME
-else
-    STUDENT_NAME=$1
-fi
-if [ -z "$2" ]; then
-    read -p "Enter City: " CITY
-else
-    CITY=$2
-fi
-
-echo "Student Name: $STUDENT_NAME"
-echo "City: $CITY"
+pipeline {
+    agent any
+    parameters {
+        string(name: 'STUDENT_NAME', defaultValue: 'Alice', description: 'Enter Student Name')
+        string(name: 'CITY', defaultValue: 'New York', description: 'Enter City')
+    }
+    stages {
+        stage('Run Shell Script with Parameters') {
+            steps {
+                sh """
+                    #!/bin/bash
+                    echo "Student Name: ${STUDENT_NAME}"
+                    echo "City: ${CITY}"
+                """
+            }
+        }
+    }
+}
